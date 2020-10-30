@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.bwf.shop.admin.mapper.OrderAddressMapper">
+<!--
+    <select id="getTabAddress" resultMap="OrderAddress">
+        select *  from order_address where orderNo in (
+         select order_no from `order` WHERE
+            order_status=#{order_status}
+         )
+    </select>
+-->
+
+    <select id="getTabAddress" resultType="com.bwf.shop.admin.bean.po.OrderAddress">
+         select * from order_address where orderNo in
+         (select order_no from `order` where
+         order_no=#{order_no}
+         or
+         order_status=#{order_status}
+         or
+         order_paymode=#{order_paymode}
+         or
+         createtime=#{createtime}
+         or
+         updatetime=#{updatetime}
+         )
+    </select>
+
+
+
+
+</mapper>

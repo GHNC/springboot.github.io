@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>select</title>
+    <link th:href="@{/css/bootstrap4.min.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap4.min.js}"></script>
+</head>
+<body>
+    <h4>OrderInfo_Selecter</h4>
+
+    <div class="my-1 pl-1">按订单号筛选：</div>
+    <form th:action="@{/order/order}" method="get">
+        <input type="text" name="order_no">
+        <input type="submit" value="OK">
+    </form>
+
+
+    <div class="my-1 pl-1">按订单状态筛选：</div>
+    <form th:action="@{/order/order}" method="get">
+        <select name="order_status" class="form-control">
+            <option th:each="orderStatus:${orderStatus}" th:value="${orderStatus.order_status}" th:text="${orderStatus.order_status}">显示文字</option>
+        </select>
+        <button class="btn btn-danger form-control"> OK </button>
+    </form>
+
+    <div class="my-1 pl-1">按支付方式筛选：</div>
+    <form th:action="@{/order/order}" method="get">
+        <select name="order_paymode" class="form-control">
+            <option th:each="orderPayMode:${orderPayMode}" th:value="${orderPayMode.order_paymode}" th:text="${orderPayMode.order_paymode}">显示文字</option>
+        </select>
+        <button class="btn btn-danger form-control"> OK </button>
+    </form>
+
+    <div class="my-1 pl-1">按创建时间筛选：</div>
+    <form th:action="@{/order/order}" method="get">
+        <input type="date" name="createtime"/>
+        <input type="submit" value="OK">
+    </form>
+
+    <div class="my-1 pl-1">按更新时间筛选：</div>
+    <form th:action="@{/order/order}" method="get">
+        <input type="date" name="updatetime"/>
+        <input type="submit" value="OK">
+    </form>
+
+    <table  border="2px">
+        <tr>
+            <th>order_no</th>
+            <th>order_status</th>
+            <th>order_spuamount</th>
+            <th>order_expressfee</th>
+            <th>order_totalamount</th>
+            <th>order_discountamount</th>
+            <th>order_payamount</th>
+            <th>order_paymode</th>
+            <th>order_payplatform</th>
+            <th>order_ipaddress</th>
+            <th>order_paymentno</th>
+            <th>createtime</th>
+            <th>updatetime</th>
+            <th>order_user_id</th>
+        </tr>
+
+        <tr th:each="orderStatus:${orderStatus}">
+            <td th:text="${orderStatus.order_no}"></td>
+            <td th:text="${orderStatus.order_status}"></td>
+            <td th:text="${orderStatus.order_spuamount}"></td>
+            <td th:text="${orderStatus.order_expressfee}"></td>
+            <td th:text="${orderStatus.order_totalamount}"></td>
+            <td th:text="${orderStatus.order_discountamount}"></td>
+            <td th:text="${orderStatus.order_payamount}"></td>
+            <td th:text="${orderStatus.order_paymode}"></td>
+            <td th:text="${orderStatus.order_payplatform}"></td>
+            <td th:text="${orderStatus.order_ipaddress}"></td>
+            <td th:text="${orderStatus.order_paymentno}"></td>
+            <td th:text="${orderStatus.createtime}"></td>
+            <td th:text="${orderStatus.updatetime}"></td>
+            <td th:text="${orderStatus.order_user_id}"></td>
+        </tr>
+
+    </table>
+
+
+
+
+
+
+
+</body>
+</html>

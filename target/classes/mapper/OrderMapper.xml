@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.bwf.shop.admin.mapper.OrderMapper">
+
+        <select id="getOrderListByOrderStatus" resultType="com.bwf.shop.admin.bean.po.OrderInfo">
+            select * from `order`
+        </select>
+
+    <select id="getAllOrderList" resultType="com.bwf.shop.admin.bean.po.OrderInfo">
+        select *  from `order`
+        <where>
+            order_no=#{order_no}
+            or
+            order_paymode=#{order_paymode}
+            or
+            order_status=#{order_status}
+            or
+            createtime=#{createtime}
+            or
+            updatetime=#{updatetime}
+        </where>
+        </select>
+
+    <select id="getOrderPayMode" resultType="com.bwf.shop.admin.bean.po.OrderInfo">
+        select * from `order`
+    </select>
+
+    <update id="updateOrder">
+        update `order`
+        <set>
+            order_payplatform=#{orderInfoBO.order_payplatform}
+        </set>
+        <where>
+            order_no=#{orderInfoBO.order_no}
+            or
+            order_status=#{orderInfoBO.order_status}
+            or
+            order_paymode=#{orderInfoBO.order_paymode}
+           
+        </where>
+    </update>
+
+
+
+    <!--
+    <resultMap id="OrderInfo" type="com.bwf.shop.admin.bean.vo.OrderInfoVo">
+        <id column="id" property="id"/>
+        <result column="order_status" property="order_status"/>
+        <result column="order_user_id" property="order_user_id"/>
+        <result column="order_expressfee" property="order_expressfee"/>
+        <association
+                property="orderAddress"
+                javaType="com.bwf.shop.admin.bean.po.OrderAddress"
+                column="order_no"
+                select="com.bwf.shop.admin.mapper.OrderAddressMapper.getTabAddress"/>
+        <collection
+                property="orderDetailsList"
+                ofType="com.bwf.shop.admin.bean.po.OrderDetails"
+                column="order_no"
+                select="com.bwf.shop.admin.mapper.OrderDetailsMapper.getTabOrderDetails"
+                fetchType="lazy"/>
+    </resultMap>
+-->
+
+
+</mapper>
